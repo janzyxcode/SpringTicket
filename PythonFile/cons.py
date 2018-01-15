@@ -7,7 +7,8 @@ import os
 
 
 # currentWorkPath = os.getcwd()
-currentWorkPath = '/Users/liaonaigang/Desktop/SprintTicket/Code/PythonFile'
+# currentWorkPath = '/Users/liaonaigang/Desktop/SprintTicket/Code/PythonFile'
+currentWorkPath = '/Users/user/Desktop/SpringTicket/PythonFile'
 configPath = currentWorkPath + '/cons/config.json'                    #配置文件
 captchaPath = currentWorkPath + '/captchaImage/catchpaImage.png'      #验证码图
 trainDicListPath = currentWorkPath + '/tickets/ticketLeft.json'       #余票
@@ -69,15 +70,15 @@ def saveConfig(key,value):
     saveData(configPath,config)
 
 
-passers = ""
-with open('/Users/liaonaigang/Desktop/SprintTicket/Code/PythonFile/cons/tepPassengers.json','r',encoding='utf-8') as file_obj:
-    passers = json.load(file_obj)
-pa = []
-list = passers['data']['normal_passengers']
-for item in list:
-    pe = {}
-    for key in item.keys():
-        pe[key] = item[key]
-    pe["str"] = str(item)
-    pa.append(pe)
-saveData(passengersPath,pa)
+# passers = ""
+# with open('/Users/liaonaigang/Desktop/SprintTicket/Code/PythonFile/cons/tepPassengers.json','r',encoding='utf-8') as file_obj:
+#     passers = json.load(file_obj)
+# pa = []
+# list = passers['data']['normal_passengers']
+# for item in list:
+#     pe = {}
+#     for key in item.keys():
+#         pe[key] = item[key]
+#     pe["str"] = str(item)
+#     pa.append(pe)
+# saveData(passengersPath,pa)

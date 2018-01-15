@@ -8,9 +8,12 @@
 
 import Foundation
 
-let ProjectPath = "/Users/liaonaigang/Desktop/SprintTicket"
-let launchPath = ProjectPath + "/venv/bin/python3.5"
-let PythonDocmentPath = ProjectPath + "/Code/PythonFile"
+//let ProjectPath = "/Users/liaonaigang/Desktop/SprintTicket"
+let ProjectPath = "/Users/user/Desktop/SpringTicket"
+//let launchPath = ProjectPath + "/venv/bin/python3.5"
+let launchPath = ProjectPath + "/venv1/bin/python3.6"
+//let PythonDocmentPath = ProjectPath + "/Code/PythonFile"
+let PythonDocmentPath = ProjectPath + "/PythonFile"
 let updateTrainListPath = PythonDocmentPath + "/updatecTrainList.py"
 let trainListPath = PythonDocmentPath + "/cons/trainList.json"
 let configPath = PythonDocmentPath + "/cons/config.json"

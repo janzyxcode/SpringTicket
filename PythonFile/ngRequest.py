@@ -26,7 +26,8 @@ __headers = {
 #         "Host": "kyfw.12306.cn",
 #         "Referer": "https://kyfw.12306.cn/otn/passport?redirect=/otn/"
 # "Origin": "https://kyfw.12306.cn",
-        "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36",
+#         "User-Agent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36",
+        "User-Agent": __ua.random,
         "Referer": "https://kyfw.12306.cn/otn/login/init",
         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
         "Accept": "application/json, text/javascript, */*; q=0.01"
@@ -66,12 +67,19 @@ def postRequest(urlStr,data):
     return None
 
 def postLoginRequest(urlStr,data):
-    response = __session.post(urlStr, headers=__headers, data=data)
+    r = __session.post(urlStr, headers=__headers, data=data)
     # print(response.text)
-    if response.status_code == 200:
-        d = response.json()
-        print(d)
-        return d['result_message']
+    if r.status_code == 200:
+        print(type(r.content))
+        print(r.content)
+        print(type(r.text))
+        print(r.text)
+        t = '登录成功'
+        if t in r.text or 'DOCTYPE' in r.text:
+            return t
+        # d = json.loads(r.text)
+        # print(d)
+        # return d['result_message']
     return None
 
 def clearCookies():

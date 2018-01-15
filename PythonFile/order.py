@@ -11,18 +11,17 @@ def checkUser():
     url = 'https://kyfw.12306.cn/otn/login/checkUser'
     return ngRequest.postRequest(url, data)
 
-def submitOrderRequest():
+def submitOrderRequest(trainDate,fromCityName,toCityName,secretStr,dict):
     url = 'https://kyfw.12306.cn/otn/leftTicket/submitOrderRequest'
     data = {
-        "train_date": "2018-01-24",
-        "back_train_date": ":2018-01-13",   #返程，因为是单程票，所以默认选购票日期
+        "train_date": trainDate,
+        "back_train_date": trainDate,   #返程，因为是单程票，所以默认选购票日期
         "tour_flag": "dc",                  #票务类型，dc为单程票
         "purpose_codes": "ADULT",
-        "query_from_station_name": "广州",
-        "query_to_station_name": "长沙",
+        "query_from_station_name": fromCityName,
+        "query_to_station_name": toCityName,
         "undefined": "",
-        "secretStr": "J/h6B7nEB9laBq2aueJ74scK19iV3qzEMZccQwNDugf4Jw9mg8h7d4Lc06rt+5hJwmB6KergTHyJEDKX7p/DWl5+v/nwDio"
-                     "/VHLUYCIezP+ltnWvaLtJpCegUCw/bBLhPewY4+Ji47Ugfy9BjCqMMaBj3wK/LjWOBuSiD5EKWz/ieJM4yVP2rgYFhSSKYMPUlOj3JaZIkLuMozZA5IGTllVLjGXmWexvIK/4/M1t2wun49S83ur45tUjf4/b1KTB25rqUw=="
+        "secretStr": secretStr
     }
     return ngRequest.postRequest(url,data)
 
@@ -32,7 +31,7 @@ def checkOrderInfo():
     data = {
         "cancel_flag": 2,
         "bed_level_order_num": "000000000000000000000000000000",
-        "passengerTicketStr": "3,0,1,廖乃刚,1,452123198907101937,13622317364,N",
+        "passengerTicketStr": "3,0,1,廖乃刚,1,452123198907101937,13622317364,N",       #座位类型,0,票类型(成人/儿童),name,身份类型(身份证/军官证....),身份证,电话号码,保存状态
         "oldPassengerStr": "廖乃刚,1,452123198907101937,1_",
         "tour_flag": "dc",
         "randCode": "",

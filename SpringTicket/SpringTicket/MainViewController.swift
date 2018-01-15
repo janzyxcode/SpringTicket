@@ -19,17 +19,11 @@ class MainViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settupViews()
         
         timer = Timer(timeInterval: 0.5, target: self, selector: #selector(runForInfo), userInfo: nil, repeats: true)
         RunLoop.main.add(timer, forMode: .commonModes)
     }
-    
-    private func settupViews(){
-//        tableView.usesAlternatingRowBackgroundColors = true
-//        tableView.selectionHighlightStyle = .none
-    }
-    
+
     @objc func runForInfo(){
         getTicketLeftJson()
         getCapthaImage()

@@ -23,58 +23,77 @@ def getTrainRquestList(fromCity, toCity, trainDate):
     # req.add_header('User-Agent','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36')
     trainDictList = []
     if response.status_code == 200:
-        dic = response.json()
-        # print(dic)
-        result = dic['data']['result']
-        # print(result)
-        trainDictList = decoTrainResponse(result)
+        try:
+            dic = response.json()
+            result = dic['data']['result']
+            trainDictList = decoTrainResponse(result)
+        except ZeroDivisionError as e:
+            print(e)
     return trainDictList
 
 
 def decoTrainResponse(result):
     trainDictList = []
-    print('train list len ', len(result))
+    # print('train list len ', len(result))
     for item in result:
         ti = item.split('|')
         # print(item)
-        dict = {}
-        dict["状态"] = ti[1]
-        # dict[""] = ti[2]
-        dict["车次"] = ti[3]
-        # dict["4"] = ti[4]
-        # dict["5"] = ti[5]
-        dict["始发站"] = cons.getCityNameWithCode(ti[6])
-        dict["终点站"] = cons.getCityNameWithCode(ti[7])
-        dict["出发时间"] = ti[8]
-        dict["到达时间"] = ti[9]
-        dict["历时"] = ti[10]
-        dict["可预订"] = ti[11]  # Y:   N:   IS_TIME_NOT_BUY:
-        # dict[""] = ti[12]
-        # dict[""] = ti[13]
-        # dict[""] = ti[14]
-        # dict[""] = ti[15]
-        # dict[""] = ti[16]
-        # dict[""] = ti[17]
-        # dict[""] = ti[18]
-        # dict[""] = ti[19]
-        # dict[""] = ti[20]
-        dict["高等软卧"] = ti[21]
-        # dict[""] = ti[22]
-        dict["软卧"] = ti[23]
-        # dict[""] = ti[24]
-        # dict[""] = ti[25]
-        dict["无座"] = ti[26]
-        # dict[""] = ti[27]
-        dict["硬卧"] = ti[28]
-        dict["硬座"] = ti[29]
-        dict["二等座"] = ti[30]
-        dict["一等座"] = ti[31]
-        dict["商务座"] = ti[32]
-        # dict[""] = ti[33]
-        # dict[""] = ti[34]
-        # dict[""] = ti[35]
-        # dict[""] = ti[36]
-        trainDictList.append(dict)
+        trainNum = ti[3]
+        if len(trainNum) and trainNum[0] != 'D':
+            dict = {}
+            dict["车次"] = trainNum
+            dict["状态"] = ti[1]
+            # dict[""] = ti[2]
+            # dict["4"] = ti[4]
+            # dict["5"] = ti[5]
+            dict["始发站"] = cons.getCityNameWithCode(ti[6])
+            dict["终点站"] = cons.getCityNameWithCode(ti[7])
+            dict["始发站码"] = ti[6]
+            dict["终点站码"] = ti[7]
+            dict["出发时间"] = ti[8]
+            dict["到达时间"] = ti[9]
+            dict["历时"] = ti[10]
+            dict["可预订"] = ti[11]  # Y:   N:   IS_TIME_NOT_BUY:
+            # dict[""] = ti[12]
+            dict["日期"] = ti[13]
+            # dict[""] = ti[14]
+            # dict[""] = ti[15]
+            # dict[""] = ti[16]
+            # dict[""] = ti[17]
+            # dict[""] = ti[18]
+            # dict[""] = ti[19]
+            # dict[""] = ti[20]
+            dict["高等软卧"] = ti[21]
+            # dict[""] = ti[22]
+            dict["软卧"] = ti[23]
+            # dict[""] = ti[24]
+            # dict[""] = ti[25]
+            dict["无座"] = ti[26]
+            # dict[""] = ti[27]
+            dict["硬卧"] = ti[28]
+            dict["硬座"] = ti[29]
+
+            dict["一等座"] = ti[31]
+            dict["商务座"] = ti[32]
+            dict["str"] = item
+            num = str(ti[30])
+            print(num)
+            if num == '有':
+                dict["二等座"] = num
+                return dict
+            if  (num == '无' or num == '') == False:
+                dict["二等座"] = num
+                return dict
+            # dict[""] = ti[33]
+            # dict[""] = ti[34]
+            # dict[""] = ti[35]
+            # dict[""] = ti[36]
+            trainDictList.append(dict)
+        else:
+            break
+
+
+
 
         # c = 0
         # for n in ti:
