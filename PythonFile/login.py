@@ -41,9 +41,9 @@ def logout():
 
 def loginReq():
     data = {
-        "username": 'liaonaigang',
-        "password": "liaonai620",
-        "appid": "otn"
+        'username': 'liaonaigang',
+        'password': 'liaonai620',
+        'appid': 'otn'
     }
     url = 'https://kyfw.12306.cn/passport/web/login'
     return ngRequest.postLoginRequest(url,data)
